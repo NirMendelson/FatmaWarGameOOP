@@ -3,7 +3,7 @@ public class Parent_Unit {
 
 	String secretCode = "Parent";
 	String category = "Parent";
-
+	int numOfWins = 0;
 
 	public Parent_Unit() {
 		this.secretCode = "Parent";
@@ -14,7 +14,15 @@ public class Parent_Unit {
         return secretCode;
     }
     
-	
+    // Getter method for secretCode
+    public int getNumOfWins() {
+        return numOfWins;
+    }
+    
+    public int getCategoryNumOfWins() {
+    	return 0;
+    }
+    
 	// Getter method for category
     public String getcategory() {
         return category;

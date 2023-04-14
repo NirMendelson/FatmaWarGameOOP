@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
 
@@ -38,9 +39,16 @@ public class Main {
 						warRound = 0;
 						printNumOfCards(playerDeck, computerDeck);	
 					}
+				warRound = 0;
 				gameOn = playAgain(playerDeck, computerDeck);
 			}
 	}
+	
+//	public static void specialMove(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
+//		if (playerDeck.get(0).category.equals("Ground")) {
+//			computerDeck.
+//		}
+//	}
 
 	// in war mode every player need to draw four cards
 	public static void warMode(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck, int warRound) {
@@ -240,9 +248,96 @@ public class Main {
 
 	// show the first card of each player
 	public static void showCards(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
-		System.out.println("AI " + computerDeck.get(0).getSecretCode());
-		System.out.println("Player " + playerDeck.get(0).getSecretCode());
-		sc.nextLine();
+		// DEBUGGING
+		System.out.println("Player " + playerDeck.get(0).getSecretCode() + " " + playerDeck.get(0).getNumOfWins() + " " + playerDeck.get(0).getcategory() + " " + playerDeck.get(0).getCategoryNumOfWins());
+		System.out.println("AI " + computerDeck.get(0).getSecretCode() + " " + computerDeck.get(0).getNumOfWins() + " " + computerDeck.get(0).getcategory() + " " + computerDeck.get(0).getCategoryNumOfWins());
+		System.out.println("");
+		
+		
+		
+		if (computerDeck.get(0).getNumOfWins() == 0) {
+			System.out.println("AI " + computerDeck.get(0).getSecretCode());
+		}
+		else {
+			if (computerDeck.get(0).category.equals("Ground")) {
+				System.out.print("AI " + computerDeck.get(0).getSecretCode());
+				for (int i = 0; i < computerDeck.get(0).getNumOfWins(); i++) {
+					System.out.print("#");
+				}
+			}
+			else if (computerDeck.get(0).category.equals("Air")) {
+				if (computerDeck.get(0).getCategoryNumOfWins() < 4 ) {
+					System.out.print("AI " + computerDeck.get(0).getSecretCode());
+					for (int i = 0; i < computerDeck.get(0).getCategoryNumOfWins(); i++) {
+						System.out.print("#");
+					}
+				}
+				else {
+					System.out.print("####");
+				}
+			}
+			else if (computerDeck.get(0).category.equals("Navy")) {
+				Random random = new Random();
+		        int randomNumber = random.nextInt(100) + 1; // 1 to 100
+		        if (randomNumber <= 30) {
+					System.out.print("AI " + computerDeck.get(0).getSecretCode());
+					System.out.print("##");
+		        }
+		        else if ((randomNumber > 30) && (randomNumber <= 50)) {
+		        	System.out.print("AI " + computerDeck.get(0).getSecretCode());
+					System.out.print("##");
+		        }
+		        else {
+		        	System.out.println("AI " + computerDeck.get(0).getSecretCode());
+		        }
+			}
+		}
+		
+		if (playerDeck.get(0).getNumOfWins() == 0) {
+			System.out.println("Player " + playerDeck.get(0).getSecretCode());
+			sc.nextLine();
+		}
+		else {
+			if (playerDeck.get(0).category.equals("Ground")) {
+				System.out.print("Player " + playerDeck.get(0).getSecretCode());
+				for (int i = 0; i < playerDeck.get(0).getNumOfWins(); i++) {
+					System.out.print("#");
+					
+				}
+				sc.nextLine();
+			}
+			else if (playerDeck.get(0).category.equals("Air")) {
+				if (playerDeck.get(0).getCategoryNumOfWins() < 4 ) {
+					System.out.print("Player " + playerDeck.get(0).getSecretCode());
+					for (int i = 0; i < playerDeck.get(0).getCategoryNumOfWins(); i++) {
+						System.out.print("#");
+					}
+					sc.nextLine();
+				}
+				else {
+					System.out.print("####");
+					sc.nextLine();
+				}
+			}
+			else if (playerDeck.get(0).category.equals("Navy")) {
+				Random random = new Random();
+		        int randomNumber = random.nextInt(100) + 1; // 1 to 100
+		        if (randomNumber <= 30) {
+					System.out.print("Player " + playerDeck.get(0).getSecretCode());
+					System.out.print("##");
+					sc.nextLine();
+		        }
+		        else if ((randomNumber > 30) && (randomNumber <= 50)) {
+		        	System.out.print("Player " + playerDeck.get(0).getSecretCode());
+					System.out.print("##");
+					sc.nextLine();
+		        }
+		        else {
+		        	System.out.println("Player " + playerDeck.get(0).getSecretCode());
+					sc.nextLine();
+		        }
+			}
+		}
 	}
 
 	// asking the player if he wants to play, if he reply "no" then the computer wins

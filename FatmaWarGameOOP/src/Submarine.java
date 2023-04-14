@@ -13,10 +13,27 @@ public class Submarine extends Navy {
     public String getSecretCode() {
         return secretCode;
     }
-	
+    
+    // Getter method for secretCode
+    public int getNumOfWins() {
+        return numOfWins;
+    }
+
+    public int getCategoryNumOfWins() {
+    	return super.numOfWins;
+    }
+    
+	// Getter method for category
+    public String getcategory() {
+        return super.category;
+    }
+    
 	public <T> boolean wins(T other) {
 	    if ((other instanceof Tank) || (other instanceof Battleship) || (other instanceof Fighter_Jet) || (other instanceof Helicopter)) {
-	        return true;
+	    	numOfWins++;
+	    	super.numOfWins++;
+
+	    	return true;
 	    } else {
 	        return false;
 	    }
