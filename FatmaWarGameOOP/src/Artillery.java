@@ -12,20 +12,8 @@ public class Artillery extends Ground {
         return secretCode;
     }
     
-//    // Getter method for secretCode
-//    public int getNumOfWins() {
-//        return numOfWins;
-//    }
-//
-//    public int getCategoryNumOfWins() {
-//    	return super.numOfWins;
-//    }
-//    
-//	// Getter method for category
-//    public String getcategory() {
-//        return super.getCategory();
-//    }
-    
+ // Override the wins() method in the parent class (Ground)
+    @Override
 	public <T> boolean wins(T other) {
 	    if ((other instanceof Tank) || (other instanceof Submarine)) {
 	    	incrementNumOfWinsChild(); // Increment wins for this instance

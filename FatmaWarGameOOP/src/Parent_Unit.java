@@ -4,6 +4,7 @@ public class Parent_Unit {
 	String secretCode = "Parent";
 	String category = "Parent";
 	int numOfWins = 0;
+	int numOfWinsChild = 0;
 
 	public Parent_Unit() {
 		this.secretCode = "Parent";
@@ -19,6 +20,11 @@ public class Parent_Unit {
         return numOfWins;
     }
     
+ // Getter method for wins of this specific Ground instance
+    public int getNumOfWinsChild() {
+        return numOfWinsChild;
+    }
+    
     public int getCategoryNumOfWins() {
     	return 0;
     }
@@ -30,6 +36,11 @@ public class Parent_Unit {
     
     public <T> boolean wins(T other) {
 	    return false;
+	}
+
+	public boolean wins() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
 

@@ -249,96 +249,127 @@ public class Main {
 	// show the first card of each player
 	public static void showCards(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
 		// DEBUGGING
-		System.out.println("Player " + playerDeck.get(0).getSecretCode() + " " + playerDeck.get(0).getNumOfWins() + " " + playerDeck.get(0).getcategory() + " " + playerDeck.get(0).getCategoryNumOfWins());
-		System.out.println("AI " + computerDeck.get(0).getSecretCode() + " " + computerDeck.get(0).getNumOfWins() + " " + computerDeck.get(0).getcategory() + " " + computerDeck.get(0).getCategoryNumOfWins());
+		System.out.println("AI " + computerDeck.get(0).getSecretCode() + " " + computerDeck.get(0).getNumOfWinsChild() + " " + computerDeck.get(0).getcategory() + " " + computerDeck.get(0).getNumOfWins());
+		System.out.println("Player " + playerDeck.get(0).getSecretCode() + " " + playerDeck.get(0).getNumOfWinsChild() + " " + playerDeck.get(0).getcategory() + " " + playerDeck.get(0).getNumOfWins());
 		System.out.println("");
+
+		String computerAddCardsLine = "";
+		String playerAddCardsLine = "";
 		
-		
-		
-		if (computerDeck.get(0).getNumOfWins() == 0) {
+		if (playerDeck.get(0).getNumOfWins() == 0) {
 			System.out.println("AI " + computerDeck.get(0).getSecretCode());
 		}
 		else {
-			if (computerDeck.get(0).category.equals("Ground")) {
-				System.out.print("AI " + computerDeck.get(0).getSecretCode());
-				for (int i = 0; i < computerDeck.get(0).getNumOfWins(); i++) {
+			if (playerDeck.get(0).getcategory().equals("Ground")) {
+				System.out.println("AI " + computerDeck.get(0).getSecretCode());
+				for (int i = 0; i < playerDeck.get(0).getNumOfWinsChild(); i++) {
 					System.out.print("#");
 				}
+				if (playerDeck.get(0).getNumOfWinsChild() > 0) {
+					playerAddCardsLine = "Player Ground special power added " + playerDeck.get(0).getNumOfWinsChild() + " cards";
+				}
 			}
-			else if (computerDeck.get(0).category.equals("Air")) {
-				if (computerDeck.get(0).getCategoryNumOfWins() < 4 ) {
-					System.out.print("AI " + computerDeck.get(0).getSecretCode());
-					for (int i = 0; i < computerDeck.get(0).getCategoryNumOfWins(); i++) {
+			else if (playerDeck.get(0).getcategory().equals("Air")) {
+				System.out.print("AI " + computerDeck.get(0).getSecretCode());
+				if (playerDeck.get(0).getNumOfWins() < 4) {
+					for (int i = 0; i < playerDeck.get(0).getNumOfWins(); i++) {
 						System.out.print("#");
 					}
 				}
 				else {
-					System.out.print("####");
+					for (int i = 0; i < 4; i++) {
+						System.out.print("#");
+					}
 				}
+				System.out.println("");
+				playerAddCardsLine = "Player Air special power added " + playerDeck.get(0).getNumOfWins() + " cards";
 			}
-			else if (computerDeck.get(0).category.equals("Navy")) {
+			else {
 				Random random = new Random();
-		        int randomNumber = random.nextInt(100) + 1; // 1 to 100
-		        if (randomNumber <= 30) {
+				int randomNumber = random.nextInt(100) + 1; // 1 to 100
+				if (randomNumber <= 30) {
 					System.out.print("AI " + computerDeck.get(0).getSecretCode());
 					System.out.print("##");
-		        }
-		        else if ((randomNumber > 30) && (randomNumber <= 50)) {
-		        	System.out.print("AI " + computerDeck.get(0).getSecretCode());
-					System.out.print("##");
-		        }
-		        else {
-		        	System.out.println("AI " + computerDeck.get(0).getSecretCode());
-		        }
+					System.out.println("");
+					playerAddCardsLine = "Player Navy special power added 2 cards";
+				}
+				else if ((randomNumber > 30) && (randomNumber <= 50)) {
+					System.out.print("AI " + computerDeck.get(0).getSecretCode());
+					System.out.print("#");
+					System.out.println("");
+					playerAddCardsLine = "Player Navy special power added 1 cards";
+				}
+				else {
+					System.out.println("AI " + computerDeck.get(0).getSecretCode());
+					playerAddCardsLine = "Player Navy special power added 0 cards";
+				}
 			}
 		}
-		
-		if (playerDeck.get(0).getNumOfWins() == 0) {
+
+
+		if (computerDeck.get(0).getNumOfWins() == 0) {
 			System.out.println("Player " + playerDeck.get(0).getSecretCode());
-			sc.nextLine();
 		}
 		else {
-			if (playerDeck.get(0).category.equals("Ground")) {
-				System.out.print("Player " + playerDeck.get(0).getSecretCode());
-				for (int i = 0; i < playerDeck.get(0).getNumOfWins(); i++) {
+			if (computerDeck.get(0).getcategory().equals("Ground")) {
+				System.out.println("Player " + playerDeck.get(0).getSecretCode());
+				for (int i = 0; i < computerDeck.get(0).getNumOfWinsChild(); i++) {
 					System.out.print("#");
-					
 				}
-				sc.nextLine();
+				
+				if (computerDeck.get(0).getNumOfWinsChild() > 0) {
+					System.out.println("");
+					computerAddCardsLine = "AI Ground special power added " + computerDeck.get(0).getNumOfWinsChild() + " cards";
+				}
 			}
-			else if (playerDeck.get(0).category.equals("Air")) {
-				if (playerDeck.get(0).getCategoryNumOfWins() < 4 ) {
-					System.out.print("Player " + playerDeck.get(0).getSecretCode());
-					for (int i = 0; i < playerDeck.get(0).getCategoryNumOfWins(); i++) {
+			else if (computerDeck.get(0).getcategory().equals("Air")) {
+				System.out.print("Player " + playerDeck.get(0).getSecretCode());
+				if (computerDeck.get(0).getNumOfWins() < 4) {
+					for (int i = 0; i < computerDeck.get(0).getNumOfWins(); i++) {
 						System.out.print("#");
 					}
-					sc.nextLine();
 				}
 				else {
-					System.out.print("####");
-					sc.nextLine();
+					for (int i = 0; i < 4; i++) {
+						System.out.print("#");
+					}
 				}
+				System.out.println("");
+				computerAddCardsLine = "AI Air special power added " + computerDeck.get(0).getNumOfWins() + " cards";
 			}
-			else if (playerDeck.get(0).category.equals("Navy")) {
+			else {
 				Random random = new Random();
-		        int randomNumber = random.nextInt(100) + 1; // 1 to 100
-		        if (randomNumber <= 30) {
+				int randomNumber = random.nextInt(100) + 1; // 1 to 100
+				if (randomNumber <= 30) {
 					System.out.print("Player " + playerDeck.get(0).getSecretCode());
 					System.out.print("##");
-					sc.nextLine();
-		        }
-		        else if ((randomNumber > 30) && (randomNumber <= 50)) {
-		        	System.out.print("Player " + playerDeck.get(0).getSecretCode());
-					System.out.print("##");
-					sc.nextLine();
-		        }
-		        else {
-		        	System.out.println("Player " + playerDeck.get(0).getSecretCode());
-					sc.nextLine();
-		        }
+					System.out.println("");
+					computerAddCardsLine = "AI Navy special power added 2 cards";
+				}
+				else if ((randomNumber > 30) && (randomNumber <= 50)) {
+					System.out.print("Player " + playerDeck.get(0).getSecretCode());
+					System.out.print("#");
+					System.out.println("");
+					computerAddCardsLine = "AI Navy special power added 1 cards";
+				}
+				else {
+					System.out.println("Player " + playerDeck.get(0).getSecretCode());
+					computerAddCardsLine = "AI Navy special power added 0 cards";
+				}
 			}
 		}
+		if (computerAddCardsLine != "") {
+			System.out.println(computerAddCardsLine);
+		}
+		if (playerAddCardsLine != "") {
+			System.out.println(playerAddCardsLine);
+		}
+		sc.nextLine();
 	}
+	
+
+		
+		
 
 	// asking the player if he wants to play, if he reply "no" then the computer wins
 	public static boolean playQuest() {

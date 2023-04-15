@@ -11,21 +11,9 @@ public class Combat_Engineering extends Ground {
     public String getSecretCode() {
         return secretCode;
     }
-    
-//    // Getter method for secretCode
-//    public int getNumOfWins() {
-//        return numOfWins;
-//    }
-//    
-//    public int getCategoryNumOfWins() {
-//    	return super.numOfWins;
-//    }
-//    
-//	// Getter method for category
-//    public String getcategory() {
-//        return super.getCategory();
-//    }
 
+ // Override the wins() method in the parent class (Ground)
+    @Override
 	public <T> boolean wins(T other) {
 	    if ((other instanceof Submarine) || (other instanceof Battleship) || (other instanceof Artillery)) {
 	    	incrementNumOfWinsChild(); // Increment wins for this instance
