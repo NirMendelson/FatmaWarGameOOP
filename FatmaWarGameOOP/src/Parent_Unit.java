@@ -34,6 +34,14 @@ public class Parent_Unit {
         return category;
     }
     
+    public int specialPower() {
+    	return 0;
+    }
+    
+    public int getSpecialPowerNumber() {
+    	return 0;
+    }
+    
     public <T> boolean wins(T other) {
 	    return false;
 	}

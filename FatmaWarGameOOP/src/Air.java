@@ -34,13 +34,21 @@ public class Air extends Parent_Unit {
     public void incrementNumOfWinsChild() {
         numOfWinsChild++;
     }
+    
+    public int specialPower() {
+    	return numOfWins;
+    }
+    
+    public int getSpecialPowerNumber() {
+    	return numOfWins;
+    }
 
     // Override the wins() method in the parent class (Parent_Unit)
     @Override
     public boolean wins() {
         incrementNumOfWins(); // Increment total wins of Ground
         incrementNumOfWinsChild(); // Increment wins of this specific Ground instance
-        System.out.println("Num of Wins of Ground is " + super.getNumOfWins());
+//        System.out.println("Num of Wins of Air is " + getNumOfWins());
         return true; // or false, depending on win logic
     }
 	

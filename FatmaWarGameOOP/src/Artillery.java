@@ -18,7 +18,7 @@ public class Artillery extends Ground {
 	    if ((other instanceof Tank) || (other instanceof Submarine)) {
 	    	incrementNumOfWinsChild(); // Increment wins for this instance
 	        incrementNumOfWins(); // Increment total wins in Ground
-	    	System.out.println("Num of Wins of Ground is " + super.getNumOfWins());
+//	    	System.out.println("Num of Wins of Ground is " + super.getNumOfWins());
 	        return true;
 	    } else {
 	        return false;
