@@ -17,7 +17,6 @@ public class Tank extends Ground {
         if ((other instanceof Battleship) || (other instanceof Helicopter) || (other instanceof Combat_Engineering)) {
             incrementNumOfWinsChild(); // Increment wins for this instance of Tank
             incrementNumOfWins(); // Increment total wins in Ground
-//            System.out.println("Num of Wins of Ground is " + super.getNumOfWins());
             return true;
         } else {
             return false;

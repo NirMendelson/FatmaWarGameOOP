@@ -55,7 +55,6 @@ public class Navy extends Parent_Unit {
     public boolean wins() {
         incrementNumOfWins(); // Increment total wins of Ground
         incrementNumOfWinsChild(); // Increment wins of this specific Ground instance
-//        System.out.println("Num of Wins of Navy is " + getNumOfWins());
         return true; // or false, depending on win logic
     }
 	

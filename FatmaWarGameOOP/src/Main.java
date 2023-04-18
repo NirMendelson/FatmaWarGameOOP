@@ -28,7 +28,6 @@ public class Main {
 						while (areCardsTheSame(playerDeck, computerDeck, warRound)) {
 							if (enoughCardsForWar(playerDeck, computerDeck, warRound)) {
 								warMode(playerDeck, computerDeck, warRound); 
-								
 								warRound = warRound + 4;
 							}
 							else {
@@ -43,16 +42,11 @@ public class Main {
 				gameOn = playAgain(playerDeck, computerDeck);
 			}
 	}
-	
-//	public static void specialMove(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
-//		if (playerDeck.get(0).category.equals("Ground")) {
-//			computerDeck.
-//		}
-//	}
 
 	// in war mode every player need to draw four cards
 	public static void warMode(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck, int warRound) {
-		if (playerDeck.get(0).getcategory().equals("Navy")) {
+		// if one of the card if navy so its navy war
+		if (playerDeck.get(0).getcategory().equals("Navy") || computerDeck.get(0).getcategory().equals("Navy")) {
 			System.out.println("Navy War!");
 		}
 		else {
@@ -65,6 +59,9 @@ public class Main {
 			System.out.print("###");
 			System.out.print(computerDeck.get(i*4+4).getSecretCode());
 		}
+		for (int i = 0; i < playerDeck.get(warRound+4).getSpecialPowerNumber(); i++) {
+			System.out.print("#");
+		}
 		System.out.println("");
 
 		System.out.print("Player ");
@@ -73,118 +70,67 @@ public class Main {
 			System.out.print("###");
 			System.out.print(playerDeck.get(i*4+4).getSecretCode());
 		}
+		for (int i = 0; i < computerDeck.get(warRound+4).getSpecialPowerNumber(); i++) {
+			System.out.print("#");
+		}
 		System.out.println("");
 	}
-	
-	// A helper method to get the value of a card
-			public static int getCardValue(String card) {
-				int value = 0;
-				try {
-					value = Integer.parseInt(card);
-				} catch (NumberFormatException e) {
-					// It's not a number, so it must be a face card or a joker
-					switch (card) {
-					case "Jo":
-						value = 15;
-						break;
-					case "A":
-						value = 14;
-						break;
-					case "J":
-						value = 11;
-						break;
-					case "Q":
-						value = 12;
-						break;
-					case "K":
-						value = 13;
-						break;
-					}
-				}
-				return value;
+
+	// a function that checks who won and add the cards accordingly
+	public static void compareAndAddCards(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck, int warRound) {
+
+		int playerSpecialPower = playerDeck.get(0 + warRound).getSpecialPowerNumber();
+		int computerSpecialPower = computerDeck.get(0 + warRound).getSpecialPowerNumber();
+
+		if (playerDeck.get(0 + warRound).wins(computerDeck.get(0 + warRound))) {
+			// player wins
+			// adding the player shown cards to the player deck
+			for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
+				playerDeck.add(playerDeck.get(i));
 			}
 
-
-			
-		public static void compareAndAddCards(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck, int warRound) {
-			
-			int playerSpecialPower = playerDeck.get(0).getSpecialPowerNumber();
-			int computerSpecialPower = computerDeck.get(0).getSpecialPowerNumber();
-			
-			if (playerDeck.get(0 + warRound).wins(computerDeck.get(0 + warRound))) {
-				// player wins
-				// adding the player shown cards to the player deck
-				for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
-					playerDeck.add(playerDeck.get(i));
-				}
-				
-				// adding the computer shown cards to the player deck
-				for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
-					playerDeck.add(computerDeck.get(i));
-//					System.out.println("player special power is " + playerSpecialPower);
-				}
-				
-				// removing the player shown cards
-				for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
-					playerDeck.remove(i);
-				}
-				
-				// removing the computer shown cards
-				for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
-					computerDeck.remove(i);
-				}
+			// adding the computer shown cards to the player deck
+			for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
+				playerDeck.add(computerDeck.get(i));
+				//					System.out.println("player special power is " + playerSpecialPower);
 			}
-			
-			else if (computerDeck.get(0 + warRound).wins(playerDeck.get(0 + warRound))) {
-				// computer wins
-				// adding the computer shown cards to the computer deck
-				for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
-					computerDeck.add(computerDeck.get(i));
-//					System.out.println("AI special power is " + computerSpecialPower);
-				}
-				
-				// adding the player shown cards to the computer deck
-				for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
-					computerDeck.add(playerDeck.get(i));
-				}
-				
-				// removing the player shown cards
-				for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
-					playerDeck.remove(i);
-				}
-				
-				// removing the computer shown cards
-				for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
-					computerDeck.remove(i);
-				}
+
+			// removing the player shown cards
+			for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
+				playerDeck.remove(i);
+			}
+
+			// removing the computer shown cards
+			for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
+				computerDeck.remove(i);
 			}
 		}
-//				
-//    			// AI wins, add cards to the end of their deck
-//				for (int i = 0; i <= 0 + warRound; i++) {
-//					playerDeck.add(playerDeck.get(i));
-//					playerDeck.add(computerDeck.get(i));
-//				}
-//				// remove the cards that were drawn
-//				for (int i = 0; i <= 0 + warRound; i++) {
-//					playerDeck.remove(i);
-//					computerDeck.remove(i);
-//				}
-//			}
-//			else {
-//				// player wins, add cards to the end of their deck
-//				for (int i = 0; i <= 0 + warRound; i++) {
-//					computerDeck.add(playerDeck.get(i));
-//					computerDeck.add(computerDeck.get(i));
-//				}
-//				// remove the cards that were drawn
-//				for (int i = 0; i <= 0 + warRound; i++) {
-//					playerDeck.remove(i);
-//					computerDeck.remove(i);
-//				}
-//			} 
-//		}
 
+		else if (computerDeck.get(0 + warRound).wins(playerDeck.get(0 + warRound))) {
+			// computer wins
+			// adding the computer shown cards to the computer deck
+			for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
+				computerDeck.add(computerDeck.get(i));
+				//					System.out.println("AI special power is " + computerSpecialPower);
+			}
+
+			// adding the player shown cards to the computer deck
+			for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
+				computerDeck.add(playerDeck.get(i));
+			}
+
+			// removing the player shown cards
+			for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
+				playerDeck.remove(i);
+			}
+
+			// removing the computer shown cards
+			for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
+				computerDeck.remove(i);
+			}
+		}
+	}
+	
 	// checking if the cards of the player and the computer are equal, works for war and non war
 	public static boolean areCardsTheSame(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck, int warRound) {
 		if (playerDeck.get(0 + warRound).getSecretCode().equals(computerDeck.get(0 + warRound).getSecretCode())) {
@@ -194,7 +140,7 @@ public class Main {
 			return false;
 		}
 	}
-
+	
 	// checks if the players have enough cards to continue playing
 	public static boolean enoughCards(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
 		if (playerDeck.isEmpty()) {
@@ -208,7 +154,7 @@ public class Main {
 		}
 		return false;
 	}
-
+	
 	// checks if the players have enough cards for "war"- in each war round you need to draw 4 cards
 	public static boolean enoughCardsForWar(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck, int warRound) {
 		if (playerDeck.size() <= warRound*4+5) {
@@ -224,10 +170,11 @@ public class Main {
 		}
 		return false;
 	}
-
+	
+	// a function that creates the deck
 	public static ArrayList<Parent_Unit> createDeck() {
 		ArrayList<Parent_Unit> deck = new ArrayList<>();
-		
+
 		for (int i = 0; i < 11; i++) {
 			Tank T = new Tank();
 			deck.add(T);
@@ -256,13 +203,10 @@ public class Main {
 			Submarine S = new Submarine();
 			deck.add(S);
 		}
-		
-		
 		Collections.shuffle(deck);
-		
+
 		return deck;
 	}
-	
 
 	// split the deck between the computer and the player
 	public static void dealCards(ArrayList<Parent_Unit> mainDeck, ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
@@ -271,21 +215,15 @@ public class Main {
 			computerDeck.add(mainDeck.remove(0));
 		}
 	}
-
-	// show the first card of each player
+	
+	// show the first card of each player and adding cards upside down if needed
 	public static void showCards(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
-		// DEBUGGING
-//		System.out.println("AI " + computerDeck.get(0).getSecretCode() + " " + computerDeck.get(0).getNumOfWinsChild() + " " + computerDeck.get(0).getcategory() + " " + computerDeck.get(0).getNumOfWins());
-//		System.out.println("Player " + playerDeck.get(0).getSecretCode() + " " + playerDeck.get(0).getNumOfWinsChild() + " " + playerDeck.get(0).getcategory() + " " + playerDeck.get(0).getNumOfWins());
-//		System.out.println("");
-
 		int playerSpecialPower = playerDeck.get(0).specialPower();
 		int computerSpecialPower = computerDeck.get(0).specialPower();
-		
-		
+
 		String computerAddCardsLine = "";
 		String playerAddCardsLine = "";
-		
+
 		if (playerSpecialPower == 0) {
 			System.out.println("AI " + computerDeck.get(0).getSecretCode());
 		}
@@ -303,9 +241,7 @@ public class Main {
 				System.out.println("");
 				playerAddCardsLine = "Player " + playerDeck.get(0).getcategory() + " special power added " + playerSpecialPower + " cards";
 			}
-			
 		}
-		
 		if (computerSpecialPower == 0) {
 			System.out.println("Player " + playerDeck.get(0).getSecretCode());
 		}
@@ -323,7 +259,6 @@ public class Main {
 				System.out.println("");
 				computerAddCardsLine = "AI " + computerDeck.get(0).getcategory() + " special power added " + computerSpecialPower + " cards";
 			}
-			
 		}
 		if (computerAddCardsLine != "") {
 			System.out.println(computerAddCardsLine);
@@ -333,124 +268,6 @@ public class Main {
 		}
 		sc.nextLine();
 	}
-		
-		
-//		
-//		
-//		if (playerDeck.get(0).getNumOfWins() == 0) {
-//			System.out.println("AI " + computerDeck.get(0).getSecretCode());
-//		}
-//		else {
-//			if (playerDeck.get(0).getcategory().equals("Ground")) {
-//				System.out.println("AI " + computerDeck.get(0).getSecretCode());
-//				for (int i = 0; i < playerDeck.get(0).getNumOfWinsChild(); i++) {
-//					System.out.print("#");
-//				}
-//				if (playerDeck.get(0).getNumOfWinsChild() > 0) {
-//					playerAddCardsLine = "Player Ground special power added " + playerDeck.get(0).getNumOfWinsChild() + " cards";
-//				}
-//			}
-//			else if (playerDeck.get(0).getcategory().equals("Air")) {
-//				System.out.print("AI " + computerDeck.get(0).getSecretCode());
-//				if (playerDeck.get(0).getNumOfWins() < 4) {
-//					for (int i = 0; i < playerDeck.get(0).getNumOfWins(); i++) {
-//						System.out.print("#");
-//					}
-//				}
-//				else {
-//					for (int i = 0; i < 4; i++) {
-//						System.out.print("#");
-//					}
-//				}
-//				System.out.println("");
-//				playerAddCardsLine = "Player Air special power added " + playerDeck.get(0).getNumOfWins() + " cards";
-//			}
-//			else {
-//				Random random = new Random();
-//				int randomNumber = random.nextInt(100) + 1; // 1 to 100
-//				if (randomNumber <= 30) {
-//					System.out.print("AI " + computerDeck.get(0).getSecretCode());
-//					System.out.print("##");
-//					System.out.println("");
-//					playerAddCardsLine = "Player Navy special power added 2 cards";
-//				}
-//				else if ((randomNumber > 30) && (randomNumber <= 50)) {
-//					System.out.print("AI " + computerDeck.get(0).getSecretCode());
-//					System.out.print("#");
-//					System.out.println("");
-//					playerAddCardsLine = "Player Navy special power added 1 cards";
-//				}
-//				else {
-//					System.out.println("AI " + computerDeck.get(0).getSecretCode());
-//					playerAddCardsLine = "Player Navy special power added 0 cards";
-//				}
-//			}
-//		}
-//
-//
-//		if (computerDeck.get(0).getNumOfWins() == 0) {
-//			System.out.println("Player " + playerDeck.get(0).getSecretCode());
-//		}
-//		else {
-//			if (computerDeck.get(0).getcategory().equals("Ground")) {
-//				System.out.println("Player " + playerDeck.get(0).getSecretCode());
-//				for (int i = 0; i < computerDeck.get(0).getNumOfWinsChild(); i++) {
-//					System.out.print("#");
-//				}
-//				
-//				if (computerDeck.get(0).getNumOfWinsChild() > 0) {
-//					System.out.println("");
-//					computerAddCardsLine = "AI Ground special power added " + computerDeck.get(0).getNumOfWinsChild() + " cards";
-//				}
-//			}
-//			else if (computerDeck.get(0).getcategory().equals("Air")) {
-//				System.out.print("Player " + playerDeck.get(0).getSecretCode());
-//				if (computerDeck.get(0).getNumOfWins() < 4) {
-//					for (int i = 0; i < computerDeck.get(0).getNumOfWins(); i++) {
-//						System.out.print("#");
-//					}
-//				}
-//				else {
-//					for (int i = 0; i < 4; i++) {
-//						System.out.print("#");
-//					}
-//				}
-//				System.out.println("");
-//				computerAddCardsLine = "AI Air special power added " + computerDeck.get(0).getNumOfWins() + " cards";
-//			}
-//			else {
-//				Random random = new Random();
-//				int randomNumber = random.nextInt(100) + 1; // 1 to 100
-//				if (randomNumber <= 30) {
-//					System.out.print("Player " + playerDeck.get(0).getSecretCode());
-//					System.out.print("##");
-//					System.out.println("");
-//					computerAddCardsLine = "AI Navy special power added 2 cards";
-//				}
-//				else if ((randomNumber > 30) && (randomNumber <= 50)) {
-//					System.out.print("Player " + playerDeck.get(0).getSecretCode());
-//					System.out.print("#");
-//					System.out.println("");
-//					computerAddCardsLine = "AI Navy special power added 1 cards";
-//				}
-//				else {
-//					System.out.println("Player " + playerDeck.get(0).getSecretCode());
-//					computerAddCardsLine = "AI Navy special power added 0 cards";
-//				}
-//			}
-//		}
-//		if (computerAddCardsLine != "") {
-//			System.out.println(computerAddCardsLine);
-//		}
-//		if (playerAddCardsLine != "") {
-//			System.out.println(playerAddCardsLine);
-//		}
-//		sc.nextLine();
-//	}
-	
-
-		
-		
 
 	// asking the player if he wants to play, if he reply "no" then the computer wins
 	public static boolean playQuest() {
@@ -470,7 +287,7 @@ public class Main {
 		}
 	}
 
-	// prints how many cards each player has in their decks
+	// printing how many cards each player has in their decks
 	public static void printNumOfCards(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
 		int compGroundCount = 0;
 		int compAirCount = 0;
@@ -502,13 +319,10 @@ public class Main {
 				playerNavyCount++;
 			}
 		}
-
 		System.out.println("AI " + compGroundCount + " Ground, " + compAirCount + " Air, " + compNavyCount + " Navy ");
 		System.out.println("Player " + playerGroundCount + " Ground, " + playerAirCount + " Air, " + playerNavyCount + " Navy ");
 	}
-
 	
-
 	// asking the player if he wants to play again, if he reply "no" then the game is over
 	public static boolean playAgain(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck) {
 		System.out.println("Would you like to start a new game?");
@@ -526,7 +340,4 @@ public class Main {
 			}
 		}
 	}
-
-
-
 }

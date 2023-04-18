@@ -47,7 +47,6 @@ public class Ground extends Parent_Unit {
     public boolean wins() {
         incrementNumOfWins(); // Increment total wins of Ground
         incrementNumOfWinsChild(); // Increment wins of this specific Ground instance
-//        System.out.println("Num of Wins of Ground is " + getNumOfWins());
         return true; // or false, depending on win logic
     }
 }

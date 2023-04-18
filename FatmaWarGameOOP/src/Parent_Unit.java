@@ -1,5 +1,5 @@
 
-public class Parent_Unit {
+abstract class Parent_Unit {
 
 	String secretCode = "Parent";
 	String category = "Parent";
@@ -12,35 +12,23 @@ public class Parent_Unit {
 	
 	// Getter method for secretCode
     public String getSecretCode() {
-        return secretCode;
+    	return secretCode;
     }
     
-    // Getter method for secretCode
-    public int getNumOfWins() {
-        return numOfWins;
-    }
+    // abstract getter method for secretCode
+    abstract public int getNumOfWins();
     
- // Getter method for wins of this specific Ground instance
-    public int getNumOfWinsChild() {
-        return numOfWinsChild;
-    }
+    // abstract getter method for wins of this specific Ground instance
+    abstract public int getNumOfWinsChild();
     
-    public int getCategoryNumOfWins() {
-    	return 0;
-    }
+	// abstract getter method for category
+    abstract public String getcategory();
     
-	// Getter method for category
-    public String getcategory() {
-        return category;
-    }
+	// abstract method for special power
+    abstract public int specialPower();
     
-    public int specialPower() {
-    	return 0;
-    }
-    
-    public int getSpecialPowerNumber() {
-    	return 0;
-    }
+	// abstract getter method for special power
+    abstract public int getSpecialPowerNumber();
     
     public <T> boolean wins(T other) {
 	    return false;

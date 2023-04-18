@@ -18,7 +18,6 @@ public class Combat_Engineering extends Ground {
 	    if ((other instanceof Submarine) || (other instanceof Battleship) || (other instanceof Artillery)) {
 	    	incrementNumOfWinsChild(); // Increment wins for this instance
 	        incrementNumOfWins(); // Increment total wins in Ground
-//	    	System.out.println("Num of Wins of Ground is " + super.getNumOfWins());
 	    	return true;
 	    } else {
 	        return false;

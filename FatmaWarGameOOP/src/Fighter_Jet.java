@@ -12,11 +12,12 @@ public class Fighter_Jet extends Air {
         return secretCode;
     }
     
+    // Override the wins() method in the parent class (Air)
+    @Override
 	public <T> boolean wins(T other) {
 	    if ((other instanceof Tank) || (other instanceof Helicopter) || (other instanceof Artillery) || (other instanceof Combat_Engineering)) {
 	    	incrementNumOfWinsChild(); // Increment wins for this instance
 	        incrementNumOfWins(); // Increment total wins in Ground
-//	    	System.out.println("Num of Wins of Air is " + super.getNumOfWins());
 	    	return true;
 	    } else {
 	        return false;
