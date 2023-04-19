@@ -25,9 +25,7 @@ abstract class Parent_Unit {
     abstract public int getNumOfWinsChild();
     
 	// getter method for category
-    public String getcategory() {
-    	return this.category;
-    }
+    abstract public String getcategory();
     
 	// abstract method for special power
     abstract public int specialPower();
