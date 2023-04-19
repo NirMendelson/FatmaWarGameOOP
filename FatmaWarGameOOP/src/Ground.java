@@ -5,8 +5,9 @@ public class Ground extends Parent_Unit {
     private static int numOfWins; // Total wins for all Ground instances
     private int numOfWinsChild; // Wins for this specific Ground instance
 
+    // constructor
     public Ground() {
-        numOfWinsChild = 0;
+        this.secretCode = "Ground";
     }
 
     // Getter method for category
@@ -40,13 +41,5 @@ public class Ground extends Parent_Unit {
     
     public int getSpecialPowerNumber() {
     	return numOfWinsChild;
-    }
-
-    // Override the wins() method in the parent class (Parent_Unit)
-    @Override
-    public boolean wins() {
-        incrementNumOfWins(); // Increment total wins of Ground
-        incrementNumOfWinsChild(); // Increment wins of this specific Ground instance
-        return true; // or false, depending on win logic
     }
 }

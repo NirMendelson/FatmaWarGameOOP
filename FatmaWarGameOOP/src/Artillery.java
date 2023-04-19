@@ -1,7 +1,6 @@
 
 public class Artillery extends Ground {
 
-	String secretCode = "A";
 	
 	public Artillery() {
 		this.secretCode = "A";

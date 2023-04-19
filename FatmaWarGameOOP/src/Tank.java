@@ -1,6 +1,5 @@
 public class Tank extends Ground {
 	
-    String secretCode = "T";
 
     public Tank() {
         this.secretCode = "T";

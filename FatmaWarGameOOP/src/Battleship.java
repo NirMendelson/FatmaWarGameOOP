@@ -1,7 +1,6 @@
 
 public class Battleship extends Navy {
 
-	String secretCode = "Battleship";
 	
 	public Battleship() {
 		this.secretCode = "B";

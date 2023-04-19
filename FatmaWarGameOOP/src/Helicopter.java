@@ -1,7 +1,6 @@
 
 public class Helicopter extends Air {
 
-	String secretCode = "H";
 	
 	public Helicopter() {
 		this.secretCode = "H";

@@ -1,13 +1,16 @@
 
 abstract class Parent_Unit {
 
-	String secretCode = "Parent";
-	String category = "Parent";
-	int numOfWins = 0;
-	int numOfWinsChild = 0;
+	String secretCode;
+	String category;
+	int numOfWins;
+	int numOfWinsChild;
 
 	public Parent_Unit() {
 		this.secretCode = "Parent";
+		this.category = "Parent";
+		this.numOfWins = 0;
+		this.numOfWinsChild = 0;
 	}
 	
 	// Getter method for secretCode
@@ -32,11 +35,6 @@ abstract class Parent_Unit {
     
     public <T> boolean wins(T other) {
 	    return false;
-	}
-
-	public boolean wins() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }
 

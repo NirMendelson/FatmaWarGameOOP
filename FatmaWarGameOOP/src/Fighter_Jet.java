@@ -1,7 +1,6 @@
 
 public class Fighter_Jet extends Air {
 
-	String secretCode = "F";
 	
 	public Fighter_Jet() {
 		this.secretCode = "F";

@@ -45,6 +45,10 @@ public class Main {
 
 	// in war mode every player need to draw four cards
 	public static void warMode(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck, int warRound) {
+		
+		String playerAddCardsLine = "Player " + playerDeck.get(4 + warRound).getcategory() + " special power added " + playerDeck.get(4 + warRound).getSpecialPowerNumber() + " cards";
+		String computerAddCardsLine = "AI " + computerDeck.get(4 + warRound).getcategory() + " special power added " + computerDeck.get(4 + warRound).getSpecialPowerNumber() + " cards";
+
 		// if one of the card if navy so its navy war
 		if (playerDeck.get(0).getcategory().equals("Navy") || computerDeck.get(0).getcategory().equals("Navy")) {
 			System.out.println("Navy War!");
@@ -74,13 +78,33 @@ public class Main {
 			System.out.print("#");
 		}
 		System.out.println("");
+		
+		if (playerDeck.get(4 + warRound).getSpecialPowerNumber() != 0) {
+			System.out.println(playerAddCardsLine);
+		}
+		if (computerDeck.get(4 + warRound).getSpecialPowerNumber() != 0) {
+			System.out.println(computerAddCardsLine);
+		}
 	}
 
 	// a function that checks who won and add the cards accordingly
 	public static void compareAndAddCards(ArrayList<Parent_Unit> playerDeck, ArrayList<Parent_Unit> computerDeck, int warRound) {
 
-		int playerSpecialPower = playerDeck.get(0 + warRound).getSpecialPowerNumber();
-		int computerSpecialPower = computerDeck.get(0 + warRound).getSpecialPowerNumber();
+		int playerSpecialPower = 0;
+		int computerSpecialPower = 0;
+		
+		if (playerDeck.get(0 + warRound).category.equals("Air") && playerDeck.get(0 + warRound).getSpecialPowerNumber() >= 4) {
+			playerSpecialPower = 4;
+		}
+		else {
+			playerSpecialPower = playerDeck.get(0 + warRound).getSpecialPowerNumber();
+		}
+		if (computerDeck.get(0 + warRound).category.equals("Air") && computerDeck.get(0 + warRound).getSpecialPowerNumber() >= 4) {
+			computerSpecialPower = 4;
+		}
+		else {
+			computerSpecialPower = computerDeck.get(0 + warRound).getSpecialPowerNumber();
+		}
 
 		if (playerDeck.get(0 + warRound).wins(computerDeck.get(0 + warRound))) {
 			// player wins
@@ -92,17 +116,16 @@ public class Main {
 			// adding the computer shown cards to the player deck
 			for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
 				playerDeck.add(computerDeck.get(i));
-				//					System.out.println("player special power is " + playerSpecialPower);
 			}
 
 			// removing the player shown cards
 			for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
-				playerDeck.remove(i);
+				playerDeck.remove(0);
 			}
 
 			// removing the computer shown cards
 			for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
-				computerDeck.remove(i);
+				computerDeck.remove(0);
 			}
 		}
 
@@ -111,7 +134,6 @@ public class Main {
 			// adding the computer shown cards to the computer deck
 			for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
 				computerDeck.add(computerDeck.get(i));
-				//					System.out.println("AI special power is " + computerSpecialPower);
 			}
 
 			// adding the player shown cards to the computer deck
@@ -119,14 +141,14 @@ public class Main {
 				computerDeck.add(playerDeck.get(i));
 			}
 
-			// removing the player shown cards
-			for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
-				playerDeck.remove(i);
-			}
-
 			// removing the computer shown cards
 			for (int i = 0; i <= (0 + warRound + playerSpecialPower); i++) {
-				computerDeck.remove(i);
+				computerDeck.remove(0);
+			}
+			
+			// removing the player shown cards
+			for (int i = 0; i <= (0 + warRound + computerSpecialPower); i++) {
+				playerDeck.remove(0);
 			}
 		}
 	}
@@ -230,9 +252,7 @@ public class Main {
 		else {
 			System.out.print("AI " + computerDeck.get(0).getSecretCode());
 			if ((playerDeck.get(0).getcategory().equals("Air")) && (playerSpecialPower >= 4)) {
-				for (int i = 0; i < 4; i++) {
-					System.out.print("#");
-				}
+				System.out.println("####");
 			}
 			else {
 				for (int i = 0; i < playerSpecialPower; i++) {
@@ -248,9 +268,7 @@ public class Main {
 		else {
 			System.out.print("Player " + playerDeck.get(0).getSecretCode());
 			if ((computerDeck.get(0).getcategory().equals("Air")) && (computerSpecialPower >= 4)) {
-				for (int i = 0; i < 4; i++) {
-					System.out.print("#");
-				}
+				System.out.println("####");
 			}
 			else {
 				for (int i = 0; i < computerSpecialPower; i++) {

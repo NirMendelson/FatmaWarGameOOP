@@ -1,7 +1,6 @@
 
 public class Submarine extends Navy {
 
-	String secretCode = "S";
 	
 	public Submarine() {
 		this.secretCode = "S";

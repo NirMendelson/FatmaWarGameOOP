@@ -1,7 +1,6 @@
 
 public class Combat_Engineering extends Ground {
 
-	String secretCode = "C";
 	
 	public Combat_Engineering() {
 		this.secretCode = "C";
