@@ -24,8 +24,10 @@ abstract class Parent_Unit {
     // abstract getter method for wins of this specific Ground instance
     abstract public int getNumOfWinsChild();
     
-	// abstract getter method for category
-    abstract public String getcategory();
+	// getter method for category
+    public String getcategory() {
+    	return this.category;
+    }
     
 	// abstract method for special power
     abstract public int specialPower();

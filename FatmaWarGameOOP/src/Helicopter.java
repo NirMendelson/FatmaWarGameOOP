@@ -5,11 +5,6 @@ public class Helicopter extends Air {
 	public Helicopter() {
 		this.secretCode = "H";
 	}
-	
-	// Getter method for secretCode
-    public String getSecretCode() {
-        return secretCode;
-    }
     
     // Override the wins() method in the parent class (Air)
     @Override

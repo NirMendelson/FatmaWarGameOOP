@@ -5,11 +5,6 @@ public class Battleship extends Navy {
 	public Battleship() {
 		this.secretCode = "B";
 	}
-	
-	// Getter method for secretCode
-    public String getSecretCode() {
-        return secretCode;
-    }
     
     // Override the wins() method in the parent class (Navy)
     @Override

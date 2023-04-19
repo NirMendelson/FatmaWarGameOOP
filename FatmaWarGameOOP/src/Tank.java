@@ -5,11 +5,6 @@ public class Tank extends Ground {
         this.secretCode = "T";
     }
 
-    // Getter method for secretCode
-    public String getSecretCode() {
-        return secretCode;
-    }
-
     // Override the wins() method in the parent class (Ground)
     @Override
     public <T> boolean wins(T other) {

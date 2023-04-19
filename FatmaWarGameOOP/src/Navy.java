@@ -2,19 +2,12 @@ import java.util.Random;
 
 public class Navy extends Parent_Unit {
 
-	String category = "Navy";
 	private static int numOfWins; // Total wins for all Ground instances
     private int numOfWinsChild; // Wins for this specific Ground instance
     int specialPowerNumber;
 	
     public Navy() {
     	this.secretCode = "Navy";
-    }
-    
-    
-	// Getter method for category
-    public String getcategory() {
-        return category;
     }
 
     // Getter method for total wins of Ground

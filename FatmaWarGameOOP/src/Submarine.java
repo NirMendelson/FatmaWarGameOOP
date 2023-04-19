@@ -5,11 +5,6 @@ public class Submarine extends Navy {
 	public Submarine() {
 		this.secretCode = "S";
 	}
-	
-	// Getter method for secretCode
-    public String getSecretCode() {
-        return secretCode;
-    }
     
     // Override the wins() method in the parent class (Navy)
     @Override

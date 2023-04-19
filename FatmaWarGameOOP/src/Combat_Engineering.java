@@ -5,11 +5,6 @@ public class Combat_Engineering extends Ground {
 	public Combat_Engineering() {
 		this.secretCode = "C";
 	}
-	
-	// Getter method for secretCode
-    public String getSecretCode() {
-        return secretCode;
-    }
 
  // Override the wins() method in the parent class (Ground)
     @Override

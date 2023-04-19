@@ -1,18 +1,12 @@
 
 public class Ground extends Parent_Unit {
     
-	String category = "Ground";
     private static int numOfWins; // Total wins for all Ground instances
     private int numOfWinsChild; // Wins for this specific Ground instance
 
     // constructor
     public Ground() {
         this.secretCode = "Ground";
-    }
-
-    // Getter method for category
-    public String getcategory() {
-        return category;
     }
 
     // Getter method for total wins of Ground
