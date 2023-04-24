@@ -7,7 +7,13 @@ public class Air extends Parent_Unit {
 
     // constructor
     public Air() {
-        this.secretCode = "Air";
+    	secretCode = "Air";
+    }
+    
+ // set the parameters to zero then starting a new game
+    public void setToZero() {
+    	numOfWins = 0;
+    	numOfWinsChild = 0;
     }
     
 	
@@ -37,11 +43,21 @@ public class Air extends Parent_Unit {
     }
     
     public int specialPower() {
-    	return numOfWins;
+    	if (numOfWins > 4) {
+    		return 4;
+    	}
+    	else {
+        	return numOfWins;
+    	}
     }
     
     public int getSpecialPowerNumber() {
-    	return numOfWins;
+    	if (numOfWins > 4) {
+    		return 4;
+    	}
+    	else {
+        	return numOfWins;
+    	}
     }
 
 

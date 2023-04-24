@@ -3,7 +3,7 @@ public class Submarine extends Navy {
 
 	
 	public Submarine() {
-		this.secretCode = "S";
+		secretCode = "S";
 	}
     
     // Override the wins() method in the parent class (Navy)

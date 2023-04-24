@@ -3,7 +3,7 @@ public class Battleship extends Navy {
 
 	
 	public Battleship() {
-		this.secretCode = "B";
+		secretCode = "B";
 	}
     
     // Override the wins() method in the parent class (Navy)

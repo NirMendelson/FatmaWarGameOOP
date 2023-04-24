@@ -8,7 +8,13 @@ public class Navy extends Parent_Unit {
     int specialPowerNumber;
 	
     public Navy() {
-    	this.secretCode = "Navy";
+    	secretCode = "Navy";
+    }
+    
+ // set the parameters to zero then starting a new game
+    public void setToZero() {
+    	numOfWins = 0;
+    	numOfWinsChild = 0;
     }
     
     

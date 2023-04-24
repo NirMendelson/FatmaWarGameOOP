@@ -7,7 +7,13 @@ public class Ground extends Parent_Unit {
 
     // constructor
     public Ground() {
-        this.secretCode = "Ground";
+        secretCode = "Ground";
+    }
+    
+    // set the parameters to zero then starting a new game
+    public void setToZero() {
+    	numOfWins = 0;
+    	numOfWinsChild = 0;
     }
 
     // Getter method for category

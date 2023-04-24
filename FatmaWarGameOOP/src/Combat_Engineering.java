@@ -3,7 +3,7 @@ public class Combat_Engineering extends Ground {
 
 	
 	public Combat_Engineering() {
-		this.secretCode = "C";
+		secretCode = "C";
 	}
 
  // Override the wins() method in the parent class (Ground)

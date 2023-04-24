@@ -3,7 +3,7 @@ public class Helicopter extends Air {
 
 	
 	public Helicopter() {
-		this.secretCode = "H";
+		secretCode = "H";
 	}
     
     // Override the wins() method in the parent class (Air)

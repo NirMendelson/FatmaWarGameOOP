@@ -2,8 +2,10 @@ public class Tank extends Ground {
 	
 
     public Tank() {
-        this.secretCode = "T";
+        secretCode = "T";
     }
+    
+    
 
     // Override the wins() method in the parent class (Ground)
     @Override

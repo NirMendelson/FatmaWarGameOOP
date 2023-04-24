@@ -3,7 +3,7 @@ public class Artillery extends Ground {
 
 	
 	public Artillery() {
-		this.secretCode = "A";
+		secretCode = "A";
 	}
     
  // Override the wins() method in the parent class (Ground)

@@ -7,16 +7,18 @@ abstract class Parent_Unit {
 	int numOfWinsChild;
 
 	public Parent_Unit() {
-		this.secretCode = "Parent";
-		this.category = "Parent";
-		this.numOfWins = 0;
-		this.numOfWinsChild = 0;
+		secretCode = "Parent";
+		category = "Parent";
+		numOfWins = 0;
+		numOfWinsChild = 0;
 	}
 	
 	// Getter method for secretCode
     public String getSecretCode() {
     	return secretCode;
     }
+    
+    abstract public void setToZero();
     
     // abstract getter method for secretCode
     abstract public int getNumOfWins();
