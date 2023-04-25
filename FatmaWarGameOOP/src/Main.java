@@ -58,9 +58,7 @@ public class Main {
 			}
 	}
 
-	// in war mode every player need to draw four cards
-	public static void warMode() {
-
+	public static void declareWar() {
 		if (playerDeck.get(openCardPlayer).getcategory().equals("Navy") || computerDeck.get(openCardPlayer).getcategory().equals("Navy")) {
 			System.out.println("Navy War!");
 		}
@@ -68,67 +66,46 @@ public class Main {
 			System.out.println("War!");
 		}
 		sc.nextLine();
-		
+	}
+	
+	public static void setOpenCardsToZero() {
 		openCardAI = 0;
 		openCardPlayer = 0;
-		
-		System.out.print("AI ");
-		System.out.print(computerDeck.get(0).getSecretCode());
-		for (int j = 0; j < playerDeck.get(0).getSpecialPowerNumber(); j++) {
-			System.out.print("#");
-		}
+	}
+	
+	
+	
+	public static void printWarLine(String name) {
+		setOpenCardsToZero();
+		System.out.print(name);
+		printCardAndExtras(name);
 		for (int i = 0; i <=(warRound/4); i++) {
-			
 			System.out.print("###");
 			int temporaryAI = openCardAI + 4 + playerDeck.get(openCardPlayer).getSpecialPowerNumber();
 			int temporaryPlayer = openCardPlayer + 4 + computerDeck.get(openCardAI).getSpecialPowerNumber();
 			openCardAI = temporaryAI;
 			openCardPlayer = temporaryPlayer;
-			if (i == warRound/4) {
-				computerDeck.get(openCardAI).specialPower();
-				playerDeck.get(openCardPlayer).specialPower();
-			}
-			System.out.print(computerDeck.get(openCardAI).getSecretCode());
-			for (int j = 0; j < playerDeck.get(openCardPlayer).getSpecialPowerNumber(); j++) {
-				System.out.print("#");
-			}
-		}
-		System.out.println("");
-		
-		openCardAI = 0;
-		openCardPlayer = 0;
-		System.out.print("Player ");
-		System.out.print(playerDeck.get(0).getSecretCode());
-		for (int j = 0; j < computerDeck.get(openCardAI).getSpecialPowerNumber(); j++) {
-			System.out.print("#");
-		}
-		for (int i = 0; i <=(warRound/4); i++) {
-			
-			System.out.print("###");
-			int temporaryAI = openCardAI + 4 + playerDeck.get(openCardPlayer).getSpecialPowerNumber();
-			int temporaryPlayer = openCardPlayer + 4 + computerDeck.get(openCardAI).getSpecialPowerNumber();
-			openCardAI = temporaryAI;
-			openCardPlayer = temporaryPlayer;
-			System.out.print(playerDeck.get(openCardPlayer).getSecretCode());
-			if (computerDeck.get(openCardAI).getcategory().equals("Air") && computerDeck.get(openCardAI).getSpecialPowerNumber() >=4) {
-				System.out.print("####");
-			}
-			else {
-				for (int j = 0; j < computerDeck.get(openCardAI).getSpecialPowerNumber(); j++) {
-					System.out.print("#");
+			if (name.equals("AI ")) {
+				if (i == warRound/4) {
+					computerDeck.get(openCardAI).specialPower();
+					playerDeck.get(openCardPlayer).specialPower();
 				}
 			}
+			printCardAndExtras(name);
+
 		}
 		System.out.println("");
-		
-		
-		if (computerDeck.get(openCardAI).getSpecialPowerNumber() != 0) {
-			System.out.println("AI " + computerDeck.get(openCardAI).getcategory() + " special power added " + computerDeck.get(openCardAI).getSpecialPowerNumber() + " cards");
-		}
-		if (playerDeck.get(openCardPlayer).getSpecialPowerNumber() != 0) {
-			System.out.println("Player " + playerDeck.get(openCardPlayer).getcategory() + " special power added " + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + " cards");
-		}
-
+	}
+	
+	
+	
+	
+	// in war mode every player need to draw four cards
+	public static void warMode() {
+		declareWar();
+		printWarLine("AI ");
+		printWarLine("Player ");
+		printSpecialPowerLine();
 	}
 	
 	public static void activateSpecialPower(String name, int index) {
@@ -245,11 +222,11 @@ public class Main {
 	
 	// checks if the players have enough cards for "war"- in each war round you need to draw 4 cards
 	public static boolean enoughCardsForWar() {
-		if (playerDeck.size() < openCardPlayer + computerDeck.get(openCardAI).getSpecialPowerNumber() + 3) {
+		if (playerDeck.size() < openCardPlayer + computerDeck.get(openCardAI).getSpecialPowerNumber() + 4) {
 			System.out.println("Not enough cards");
 			System.out.println("AI wins!");
 		} 
-		else if (computerDeck.size() < openCardAI + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + 3) {
+		else if (computerDeck.size() < openCardAI + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + 4) {
 			System.out.println("Not enough cards");
 			System.out.println("Player wins!");
 		}
@@ -309,37 +286,46 @@ public class Main {
 		}
 	}
 	
+	public static void printCardAndExtras(String name) {
+		if (name.equals("AI ")) {
+			System.out.print(computerDeck.get(openCardAI).getSecretCode());
+			for (int j = 0; j < playerDeck.get(openCardPlayer).getSpecialPowerNumber(); j++) {
+				System.out.print("#");
+			}
+		}
+		else {
+			System.out.print(playerDeck.get(openCardPlayer).getSecretCode());
+			for (int j = 0; j < computerDeck.get(openCardAI).getSpecialPowerNumber(); j++) {
+				System.out.print("#");
+			}
+		}
+	}
 	
-	
+	public static void printSpecialPowerLine() {
+		if (computerDeck.get(openCardAI).getSpecialPowerNumber() != 0) {
+			System.out.println("AI " + computerDeck.get(openCardAI).getcategory() + " special power added " + computerDeck.get(openCardAI).getSpecialPowerNumber() + " cards");
+		}
+		if (playerDeck.get(openCardPlayer).getSpecialPowerNumber() != 0) {
+			System.out.println("Player " + playerDeck.get(openCardPlayer).getcategory() + " special power added " + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + " cards");
+		}
+	}
 	
 	// show the first card of each player and adding cards upside down if needed
 	public static void showCards() {
-		int playerSpecialPower = playerDeck.get(0).specialPower();
-		int computerSpecialPower = computerDeck.get(0).specialPower();		
+		playerDeck.get(openCardPlayer).specialPower();
+		computerDeck.get(openCardAI).specialPower();		
 		
-		String computerAddCardsLine = "";
-		String playerAddCardsLine = "";
-
-		System.out.print("AI " + computerDeck.get(0).getSecretCode());
-		for (int i = 0; i < playerSpecialPower; i++) {
-			System.out.print("#");
-		}
+		System.out.print("AI ");
+		printCardAndExtras("AI ");
+	
 		System.out.println("");
-		playerAddCardsLine = "Player " + playerDeck.get(0).getcategory() + " special power added " + playerSpecialPower + " cards";
 		
-		System.out.print("Player " + playerDeck.get(0).getSecretCode());
-		for (int i = 0; i < computerSpecialPower; i++) {
-			System.out.print("#");
-		}
+		System.out.print("Player ");
+		printCardAndExtras("Player ");
 		System.out.println("");
-		computerAddCardsLine = "AI " + computerDeck.get(0).getcategory() + " special power added " + computerSpecialPower + " cards";
 		
-		if (computerSpecialPower != 0) {
-			System.out.println(computerAddCardsLine);
-		}
-		if (playerSpecialPower != 0) {
-			System.out.println(playerAddCardsLine);
-		}
+		printSpecialPowerLine();
+		
 		sc.nextLine();
 	}
 
