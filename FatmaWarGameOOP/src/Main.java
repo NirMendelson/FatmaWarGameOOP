@@ -12,6 +12,7 @@ public class Main {
 	private static int warRound = 0;
 	private static int openCardAI = 0;
 	private static int openCardPlayer = 0;
+	private static String winner = "";
 
 
 	public static void main(String[] args) {
@@ -30,7 +31,7 @@ public class Main {
 						if (playQuest() == false) {
 							break outerLoop;
 						}
-						if (enoughCards() == false) {
+						if (enoughCards() == false || winner != "" ) {
 							break innerLoop;
 						}
 						showCards();
@@ -38,6 +39,9 @@ public class Main {
 						while (areCardsTheSame()) {
 							if (enoughCardsForWar()) {
 								warMode(); 
+								if (winner != "") {
+									break innerLoop;
+								}
 								warRound += 4;
 							}
 							else {
@@ -46,17 +50,18 @@ public class Main {
 						}
 						compareAndAddCards();
 						warRound = 0;
-						openCardAI = 0;
-						openCardPlayer = 0;
+						setOpenCardsToZero();
+
 
 						printNumOfCards();	
 					}
 				warRound = 0;
-				openCardAI = 0;
-				openCardPlayer = 0;
+				winner = "";
+				setOpenCardsToZero();
 				gameOn = playAgain();
 			}
 	}
+	
 
 	
 	// a function that creates the deck
@@ -221,8 +226,10 @@ public class Main {
 		System.out.print("Player ");
 		printCardAndExtras("Player ");
 		System.out.println("");
-
-		printSpecialPowerLine();
+		
+		if (winner.equals("")) {
+			printSpecialPowerLine();
+		}
 
 		sc.nextLine();
 	}
@@ -233,14 +240,41 @@ public class Main {
 		if (name.equals("AI ")) {
 			System.out.print(computerDeck.get(openCardAI).getSecretCode());
 			for (int j = 0; j < playerDeck.get(openCardPlayer).getSpecialPowerNumber(); j++) {
-				System.out.print("#");
+				if (computerDeck.size() > openCardAI + j + 1) {
+					System.out.print("#");
+				}
+				else {
+					winner = "Player";
+				}
 			}
 		}
 		else {
 			System.out.print(playerDeck.get(openCardPlayer).getSecretCode());
 			for (int j = 0; j < computerDeck.get(openCardAI).getSpecialPowerNumber(); j++) {
-				System.out.print("#");
+				if (playerDeck.size() > openCardPlayer + j + 1) {
+					System.out.print("#");
+				}
+				else {
+					winner = "AI";
+				}
 			}
+		}
+		if (winner.equals("Player")) {
+			System.out.print("Player " +  playerDeck.get(openCardPlayer).getSecretCode());
+			for (int j = 0; j < computerDeck.get(openCardAI).getSpecialPowerNumber(); j++) {
+				if (playerDeck.size() > openCardPlayer + j + 1) {
+					System.out.print("#");
+				}
+			}
+			System.out.println("");
+			System.out.println("Not enough cards");
+			System.out.println(winner + " wins!");
+		}
+		if (winner != "") {
+			System.out.println("");
+			System.out.println("Not enough cards");
+			System.out.println(winner + " wins!");
+
 		}
 	}
 
@@ -269,27 +303,54 @@ public class Main {
 	
 	// checks if the players have enough cards for "war"- in each war round you need to draw 4 cards
 	public static boolean enoughCardsForWar() {
-		if (playerDeck.size() < openCardPlayer + computerDeck.get(openCardAI).getSpecialPowerNumber() + 4) {
+//		System.out.println("started enought cards for war");
+//		System.out.println("openCardAI: " + openCardAI + " player open card special power: " + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + " next player card special power: " + playerDeck.get(openCardPlayer + computerDeck.get(openCardAI).getSpecialPowerNumber() + 4).getSpecialPowerNumber());
+//		System.out.println("openCardPlayer: " + openCardPlayer + " computer open card special power: " + computerDeck.get(openCardAI).getSpecialPowerNumber() + " next computer card special power: " + computerDeck.get(openCardAI + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + 4).getSpecialPowerNumber());
+		
+		// the first four if statements are to making sure the code won't give out of bounds error
+//		if (playerDeck.size() < 4 + computerDeck.get(openCardAI).getSpecialPowerNumber()) {
+//			System.out.println("Not enough cards");
+//			System.out.println("AI wins!");
+//		}
+//		
+//		if (computerDeck.size() < 4 + playerDeck.get(openCardAI).getSpecialPowerNumber()) {
+//			System.out.println("Not enough cards");
+//			System.out.println("Player wins!");
+//		}
+		
+		if (playerDeck.size() < openCardPlayer + computerDeck.get(openCardAI).getSpecialPowerNumber() + 5) {
 			System.out.println("Not enough cards");
 			System.out.println("AI wins!");
-		} 
-		else if (computerDeck.size() < openCardAI + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + 4) {
+		}
+		else if (computerDeck.size() < openCardAI + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + 5) {
 			System.out.println("Not enough cards");
 			System.out.println("Player wins!");
 		}
+//		else if (playerDeck.size() < openCardPlayer + computerDeck.get(openCardAI).getSpecialPowerNumber() + 4 + computerDeck.get(openCardAI + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + 4).getSpecialPowerNumber()) {
+//			System.out.println("Not enough cards");
+//			System.out.println("AI wins!");
+//		} 
+//		else if (computerDeck.size() < openCardAI + playerDeck.get(openCardPlayer).getSpecialPowerNumber() + 4 + playerDeck.get(openCardPlayer + playerDeck.get(openCardAI).getSpecialPowerNumber() + 4).getSpecialPowerNumber()) {
+//			System.out.println("Not enough cards");
+//			System.out.println("Player wins!");
+//		}
 		else {
+//			System.out.println("finished enought cards for war");
 			return true;
 		}
+//		System.out.println("finished enought cards for war");
 		return false;
 	}
 
 	
 	// declaring war, printing the war cards and printing the special powers line
 	public static void warMode() {
+//		System.out.println("started war");
 		declareWar();
 		printWarLine("AI ");
 		printWarLine("Player ");
 		printSpecialPowerLine();
+//		System.out.println("finished war");
 	}
 
 	
